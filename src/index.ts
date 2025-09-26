@@ -3,10 +3,14 @@ import { config } from "dotenv";
 config();
 import connnectDatabase from "./utils/database.js";
 
+import userRoutes from "./routes/userRoutes.js";
+
 const app = express();
 
 app.use(express.json());
 connnectDatabase();
+
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 4000;
 
