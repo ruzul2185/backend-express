@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { User } from "../models/user.js";
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 export const creteNewUser = async (req: Request, res: Response) => {
   try {
@@ -11,7 +12,12 @@ export const creteNewUser = async (req: Request, res: Response) => {
     // }
     // const newUser = new User({ name, email, password });
     // newUser.save();
-    const newUser = await User.create({ name, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
     // if (!newUser) {
     //   return res.status(400).json({ message: "User is not created" });
     // }
