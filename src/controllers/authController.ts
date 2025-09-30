@@ -7,7 +7,7 @@ export const Login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      throw new Error("Email and Password are required!");
+      throw new Error("Email and Password are re quired!");
     }
     const getUser = await User.findOne({ email });
     if (!getUser) {
